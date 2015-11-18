@@ -3,8 +3,8 @@
   "version": "2.0.0",
   "description": "Blank website using gulp and some blank files, ready for design.",
   "main": "gulpfile.js",
-  "author": "bo1g",
-  "repository": "https://github.com/bo1g/gulp-webdev",
+  "author": "rekyuu",
+  "repository": "https://github.com/rekyuu-web/nodejs-gulp",
   "license": "MIT",
   "devDependencies": {
     "coffee-script": "^1.10.0",
