@@ -47,11 +47,11 @@ gulp.task "html", ->
 
 # Server routing
 gulp.task "server", ->
-  app.set 'view engine', 'pug'
-  app.set 'views', './public/views'
-  app.use express.static './public/static'
+  app.set "view engine", "pug"
+  app.set "views", "./public/views"
+  app.use express.static "./public/static"
 
-  app.get '/', (req, res) -> res.render 'index'
+  app.get "/", (req, res) -> res.render "index"
 
   app.listen 8080
 
