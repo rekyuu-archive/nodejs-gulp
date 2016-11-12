@@ -16,7 +16,7 @@ gulp.task "clean", (cb) ->
 
 # Processes SCSS files
 gulp.task "scss", ->
-  gulp.src "./app/scss/**/*.scss"
+  gulp.src "./app/static/scss/**/*.scss"
     .pipe plumber()
     .pipe sass()
     .pipe concat("app.css")
@@ -25,7 +25,7 @@ gulp.task "scss", ->
 
 # Processes JavaScript files
 gulp.task "js", ->
-  gulp.src "./app/js/**/*.js"
+  gulp.src "./app/static/js/**/*.js"
     .pipe plumber()
     .pipe uglify()
     .pipe concat("app.js")
@@ -33,15 +33,15 @@ gulp.task "js", ->
     .pipe livereload()
 
 # Processes images
-gulp.task "img", ->
-  gulp.src "./app/img/**/*"
+gulp.task "assets", ->
+  gulp.src "./app/assets/**/*"
     .pipe plumber()
-    .pipe gulp.dest "./public/static/img"
+    .pipe gulp.dest "./public/static"
     .pipe livereload()
 
 # Processes Pug files
-gulp.task "html", ->
-  gulp.src "./app/pug/**/*.pug"
+gulp.task "views", ->
+  gulp.src "./app/views/**/*.pug"
     .pipe gulp.dest "./public/views"
     .pipe livereload()
 
@@ -51,17 +51,18 @@ gulp.task "server", ->
   app.set "views", "./public/views"
   app.use express.static "./public/static"
 
-  app.get "/", (req, res) -> res.render "index"
+  app.get "/", (req, res)      -> res.render "index"
+  app.get "/about", (req, res) -> res.render "about"
 
   app.listen 8080
 
 # Watch for file changes
 gulp.task "watch", ->
   livereload.listen()
-  gulp.watch "./app/scss/**/*.scss",  ["scss"]
-  gulp.watch "./app/js/**/*.js",      ["js"]
-  gulp.watch "./app/img/**/*",        ["img"]
-  gulp.watch "./app/pug/**/*.pug",    ["html"]
+  gulp.watch "./app/static/scss/**/*.scss", ["scss"]
+  gulp.watch "./app/static/js/**/*.js",     ["js"]
+  gulp.watch "./app/assets/**/*",           ["assets"]
+  gulp.watch "./app/views/**/*.pug",        ["views"]
 
 # Runs all gulp tasks
-gulp.task "default", ["scss", "js", "img", "html", "server", "watch"]
+gulp.task "default", ["scss", "js", "assets", "views", "server", "watch"]
